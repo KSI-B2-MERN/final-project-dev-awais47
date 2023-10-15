@@ -15,7 +15,7 @@ const News = (props) => {
 
   const updateNews = async () => {
     props.setProgress(10);
-    const url = `https://newsapi.org/v2/top-headlines?country=us&category=${props.category}&apiKey=c0625a199e7445af92f969adf08c9c95&page=${page}&pageSize=${props.pageSize}`;
+    const url = `https://newsapi.org/v2/top-headlines?country=in&category=${props.category}&apiKey=c0625a199e7445af92f969adf08c9c95&page=${page}&pageSize=${props.pageSize}`;
     setLoading(true);
     let data = await fetch(url);
     props.setProgress(30);
@@ -28,7 +28,7 @@ const News = (props) => {
   };
 
   useEffect(() => {
-    document.title = `${capitalizeFirstLetter(props.category)} - NewsMonkey`;
+    document.title = `${capitalizeFirstLetter(props.category)} - NewsApp`;
     updateNews();
     // eslint-disable-next-line
   }, []);
@@ -37,6 +37,7 @@ const News = (props) => {
     if (page > 1) {
       setPage(page - 1);
       updateNews();
+      window.scrollTo(0, 0);
     }
   };
 
@@ -44,6 +45,7 @@ const News = (props) => {
     if (page + 1 <= Math.ceil(totalResults / props.pageSize)) {
       setPage(page + 1);
       updateNews();
+      window.scrollTo(0, 0);
     }
   };
 
